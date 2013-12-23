@@ -4,7 +4,7 @@ var app = express();
 app.use(express.logger());
 
 app.get('/', function(req, res){
-  res.send('Hello World');
+  res.sendfile('./index.html');
 });
 
 app.listen(3000);
