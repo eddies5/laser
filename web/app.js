@@ -3,6 +3,8 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var llist = require('./doubly-linked-list.js');
+var kue = require('kue');
+var jobs = kue.createQueue();
 
 var positionMap = {};
 var queue = new llist();
