@@ -7,9 +7,10 @@ var Worker = require('./worker.js');
  * @api public
  */
 
-function Stream (io) {
+function Stream (io, jobs) {
 	var _worker;
 	var _io = io;
+	var _jobs = jobs;
 	setupIO();
 	setupWorker();
 
@@ -19,8 +20,9 @@ function Stream (io) {
 	 * @api private
 	 */
 
-	function setupWorker() {
-		_worker = Worker();
+	function setupWorker () {
+		_worker = new Worker(_jobs);
+		_worker.start();
 	};
 
 	/**
@@ -29,7 +31,7 @@ function Stream (io) {
 	 * @api private
 	 */
 
-	function setupIO() {
+	function setupIO () {
 		_io.sockets.on('connection', function (socket) {
 			console.log('socket connection made');
 		});

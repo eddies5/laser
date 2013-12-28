@@ -7,8 +7,18 @@
  */
 
 function Worker (jobs) {
-	this._processing = false;
-	this._jobs = jobs;
+	var _processing = false;
+	var _jobs = jobs;
+
+	/**
+	 * Processes kue jobs
+	 *
+	 * @api privileged
+	 */
+
+	this.processJobs = function () {
+		console.log('Worker processing');
+	};
 }
 
 /**
@@ -17,21 +27,11 @@ function Worker (jobs) {
  * @api public
  */
 
-Worker.prototype.start = function() {
+Worker.prototype.start = function () {
 	if (!this._processing) {
 		this._processing = true;
 		this.processJobs();
 	}
-};
-
-/**
- * Processes kue jobs
- *
- * @api private
- */
-
-Worker.prototype.processJobs = function() {
-	console.log('Worker processing');
 };
 
 /**

@@ -15,4 +15,4 @@ app.get('/', function (req, res) {
 server.listen(3000);
 console.log('Listening on port 3000');
 
-var Stream = require('./src/stream.js')(io);
+var Stream = require('./src/stream.js')(io, jobs);
