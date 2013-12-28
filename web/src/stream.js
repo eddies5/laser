@@ -8,8 +8,8 @@ var Worker = require('./worker.js');
  */
 
 function Stream (io) {
-	this._worker;
-	this._io = io;
+	var _worker;
+	var _io = io;
 	setupIO();
 	setupWorker();
 
@@ -20,7 +20,7 @@ function Stream (io) {
 	 */
 
 	function setupWorker() {
-		this._worker = Worker();
+		_worker = Worker();
 	};
 
 	/**
@@ -30,12 +30,8 @@ function Stream (io) {
 	 */
 
 	function setupIO() {
-		this._io.sockets.on('connection', function (socket) {
+		_io.sockets.on('connection', function (socket) {
 			console.log('socket connection made');
-		});
-
-		this._io.sockets.on('disconnect', function () {
-			console.log('socket disconnected');
 		});
 	};
 }
