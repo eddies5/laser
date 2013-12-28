@@ -44,10 +44,3 @@ io.sockets.on('connection', function (socket) {
     delete positionMap[socket.id];
   });
 });
-
-setInterval(function () {
-  var sock;
-  queue.toArray().forEach(function (sock, i) {
-    console.log(sock.id);
-  });
-}, 1000);
