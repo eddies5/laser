@@ -34,6 +34,7 @@ function Stream (io, jobs) {
 	function setupIO () {
 		_io.sockets.on('connection', function (socket) {
 			console.log('socket connection made');
+			_worker.addClient(socket);
 		});
 	};
 }

@@ -7,8 +7,9 @@
  */
 
 function Worker (jobs) {
-	var _processing = false;
-	var _jobs = jobs;
+	this._processing = false;
+	this._jobs = jobs;
+	this._sockets = [];
 
 	/**
 	 * Processes kue jobs
@@ -16,8 +17,39 @@ function Worker (jobs) {
 	 * @api privileged
 	 */
 
-	this.processJobs = function () {
+	this.processClients = function () {
 		console.log('Worker processing');
+		var me = this;
+		this._jobs.process('client', function (job, done) {
+			var socket = me._sockets.shift();
+			console.log('processing job');
+
+			socket.on('left', function (data) {
+				console.log('left');
+			});
+
+			socket.on('right', function (data) {
+				console.log('right');
+			});
+
+			socket.on('up', function (data) {
+				console.log('up');
+			});
+
+			socket.on('down', function (data) {
+				console.log('down');
+			});
+
+			socket.on('disconnect', function () {
+				console.log('socket disconnected');
+				done();
+			});
+
+			setTimeout(function () {
+				console.log('5 second time up');
+				done();
+			}, 5000);
+		});
 	};
 }
 
@@ -28,10 +60,17 @@ function Worker (jobs) {
  */
 
 Worker.prototype.start = function () {
-	if (!this._processing) {
+	if (this._processing === false) {
 		this._processing = true;
-		this.processJobs();
+		this.processClients();
 	}
+};
+
+Worker.prototype.addClient = function(socket) {
+	console.log('creating job');
+	this._jobs.create('client', {
+		pos: this._sockets.push(socket)
+	}).save();
 };
 
 /**

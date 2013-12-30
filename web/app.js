@@ -7,6 +7,7 @@ var jobs = kue.createQueue();
 
 app.use(express.logger());
 app.use(express.static(__dirname));
+app.use(kue.app.listen(4000));
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
