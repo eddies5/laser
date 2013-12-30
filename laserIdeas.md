@@ -31,3 +31,5 @@ Laser
 4. have a count of how many people are watching the stream
 
 5. The setInterval queue.toArray() seems to work except it will continue to work on the last element in the queue even though it is not supposed to. It did not work the first time, other times it did work. Find the special case.
+
+6. remove old jobs from redis when shutting down
