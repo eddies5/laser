@@ -18,4 +18,9 @@ var makeSocketConnection = function () {
 			case 37: socket.emit('left'); break;
 		}
 	});
+
+	socket.on('timeUp', function () {
+		console.log('time up');
+		socket.disconnect();
+	});
 };

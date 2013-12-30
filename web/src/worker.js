@@ -46,9 +46,11 @@ function Worker (jobs) {
 			});
 
 			setTimeout(function () {
-				console.log('5 second time up');
+				console.log('time up');
+				socket.emit('timeUp', {});
 				done();
-			}, 5000);
+			}, 10000);
+
 		});
 	};
 }
