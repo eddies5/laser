@@ -70,9 +70,8 @@ Worker.prototype.start = function () {
 
 Worker.prototype.addClient = function(socket) {
 	console.log('creating job');
-	this._jobs.create('client', {
-		pos: this._sockets.push(socket)
-	}).save();
+	this._sockets.push(socket);
+	this._jobs.create('client', {}).save();
 };
 
 /**
