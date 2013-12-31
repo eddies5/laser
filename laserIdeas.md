@@ -16,7 +16,7 @@ Laser
 
 1. maybe use singleton object for laser control
 
-2. get on queue method
+2. have a 'get on queue' method
 
 3. data structure for holding connections thoughts
 
@@ -26,7 +26,7 @@ Laser
 
 	c. this sounds like a hashmap
 
-	d. I have used a queue and a map to hold the indecies of connections.
+	d. I have used a queue and a map to hold the indexes of connections.
 
 4. have a count of how many people are watching the stream
 
