@@ -7,13 +7,14 @@ var jobs = kue.createQueue();
 
 app.use(express.logger());
 app.use(express.static(__dirname));
-app.use(kue.app.listen(4000));
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-server.listen(3000);
-console.log('Listening on port 3000');
+kue.app.listen(3000);
+server.listen(4000);
+console.log('Laser listening on port 3000');
+console.log('Kue listening on port 4000');
 
 var Stream = require('./src/stream.js')(io, jobs);
