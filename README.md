@@ -35,3 +35,9 @@ Laser
 	d. I have used a queue and a map to hold the indexes of connections.
 
 3. The setInterval queue.toArray() seems to work except it will continue to work on the last element in the queue even though it is not supposed to. It did not work the first time, other times it did work. Find the special case.
+
+## Redis Stuff
+
+1. How to start redis: '$ redis-server'
+
+2. How to stop redis: '$ redis-cli shutdown'
