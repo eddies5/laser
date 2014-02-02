@@ -1,8 +1,10 @@
 
-var SerialPort = require('serialport').SerialPort;
-var serialPort = new SerialPort("/dev/tty.usbmodem641", {
-	baudrate: 9600
-});
+if ('production' == process.env.NODE_ENV) {
+	var SerialPort = require('serialport').SerialPort;
+	var serialPort = new SerialPort("/dev/tty.usbmodem641", {
+		baudrate: 9600
+	});
+}
 
 /**
  * Worker constructor.
@@ -31,50 +33,58 @@ function Worker (jobs) {
 
 			socket.on('left', function (data) {
 				console.log('left');
-				serialPort.write("1", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
-				serialPort.write("2", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
+				if ('production' == process.env.NODE_ENV) {
+					serialPort.write("1", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+					serialPort.write("2", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+				}
 			});
 
 			socket.on('right', function (data) {
 				console.log('right');
-				serialPort.write("1", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
-				serialPort.write("3", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
+				if ('production' == process.env.NODE_ENV) {
+					serialPort.write("1", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+					serialPort.write("3", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+				}
 			});
 
 			socket.on('up', function (data) {
 				console.log('up');
-				serialPort.write("0", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
-				serialPort.write("4", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
+				if ('production' == process.env.NODE_ENV) {
+					serialPort.write("0", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+					serialPort.write("4", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+				}
 			});
 
 			socket.on('down', function (data) {
 				console.log('down');
-				serialPort.write("0", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
-				serialPort.write("5", function (err, results) {
-					console.log('err: ' + err);
-					console.log('results: ' + results);
-				});
+				if ('production' == process.env.NODE_ENV) {
+					serialPort.write("0", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+					serialPort.write("5", function (err, results) {
+						console.log('err: ' + err);
+						console.log('results: ' + results);
+					});
+				}
 			});
 
 			socket.on('disconnect', function () {
