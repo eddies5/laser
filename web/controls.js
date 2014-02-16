@@ -1,14 +1,21 @@
 $(document).ready(function () {
 	$('#donate_btn').click(function () {
 		console.log('donate_btn clicked');
-		makeSocketConnection();
+		console.log($('#donate_amnt').val());
+		makeSocketConnection($('#donate_amnt').val());
 	});
 
 });
 
-var makeSocketConnection = function () {
+var makeSocketConnection = function (amnt) {
 	var socket = io.connect('http://localhost');
 	console.log('made socket connection');
+
+	if (amnt == '') {
+		amnt = 0;
+	}
+
+	socket.emit('amnt', {'amnt': amnt});
 
 	$(document).keydown(function (eventObject) {
 		switch(eventObject.which){

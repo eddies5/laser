@@ -117,6 +117,12 @@ Worker.prototype.start = function () {
 
 Worker.prototype.addClient = function(socket) {
 	console.log('creating job');
+
+	// this needs to block
+	socket.on('amnt', function (data) {
+		console.log(data.amnt);
+	});
+
 	this._sockets.push(socket);
 	this._jobs.create('client', {}).save();
 };
