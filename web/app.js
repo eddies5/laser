@@ -16,8 +16,8 @@ kue.app.listen(3000);
 server.listen(4000);
 
 console.log('Running: ' + app.get('env'));
-console.log('Laser listening on port 3000');
-console.log('Kue listening on port 4000');
+console.log('Laser listening on port 4000');
+console.log('Kue listening on port 3000');
 
-var Stream = require('./src/stream.js')(io, jobs);
+var Stream = require('./src/stream.js')(io, jobs, kue);
 
