@@ -13,10 +13,13 @@ if ('production' == process.env.NODE_ENV) {
  * @api public
  */
 
-function Worker (jobs) {
+function Worker (jobs, kue) {
 	this._processing = false;
 	this._jobs = jobs;
+	this._kue = kue;
 	this._sockets = [];
+	this._socketHash = {};
+	this._curr_socket = null;
 
 	/**
 	 * Processes kue jobs
@@ -27,8 +30,17 @@ function Worker (jobs) {
 	this.processClients = function () {
 		console.log('Worker processing');
 		var me = this;
+
+		// Find ID of first job on priority queue
+		this._kue.Job.rangeByType ('job', 'failed', 0, 0, 'asc', function (err, selectedJobs) {
+    		selectedJobs.forEach(function (job) {
+    			this._curr_socket = job.data['socket_id'];
+    		});
+		});
+
 		this._jobs.process('client', function (job, done) {
-			var socket = me._sockets.shift();
+			//var socket = me._sockets.shift();
+			var socket = me._socketHash[me._curr_socket];
 			console.log('processing job');
 
 			socket.on('left', function (data) {
@@ -115,11 +127,22 @@ Worker.prototype.start = function () {
 	}
 };
 
+/**
+* Create new Kue Job, and link Job to Socket ID
+*
+*/
 Worker.prototype.addClient = function(socket) {
 	console.log('creating job');
 	this._sockets.push(socket);
-	this._jobs.create('client', {}).save();
+	var socket_id = socket.id;
+	this._socketHash[socket_id] = socket;
+	this._jobs.create('client', {'socket_id':socket_id}).save();
 };
+
+Worker.prototype.updateHash = function(id, socket) {
+	this._socketHash[id] = socket;
+	// TODO: Add some sort of error checking here - does the id already exist?, etc
+}
 
 /**
  * Export the constructor.
