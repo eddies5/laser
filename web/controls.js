@@ -1,3 +1,14 @@
+var connected = false;
+var socket;
+var keyHandler = function (eventObject) {
+	switch(eventObject.which){
+		case 38: socket.emit('up'); break;
+		case 40: socket.emit('down'); break;
+		case 39: socket.emit('right'); break;
+		case 37: socket.emit('left'); break;
+	}
+};
+
 $(document).ready(function () {
 	$('#donate_btn').click(function () {
 		console.log('donate_btn clicked');
@@ -7,20 +18,20 @@ $(document).ready(function () {
 });
 
 var makeSocketConnection = function () {
-	var socket = io.connect('http://localhost');
-	console.log('made socket connection');
+	if (!connected){
+		console.log("MAKING NEW CONNECTION IN CONTROL");
+		socket = io.connect('http://localhost');
+		console.log('made socket connection');
+		connected = true;
 
-	$(document).keydown(function (eventObject) {
-		switch(eventObject.which){
-			case 38: socket.emit('up'); break;
-			case 40: socket.emit('down'); break;
-			case 39: socket.emit('right'); break;
-			case 37: socket.emit('left'); break;
-		}
-	});
+	}
+
+	socket.emit('requestControl');
+
+	$(document).on("keydown", keyHandler);
 
 	socket.on('timeUp', function () {
 		console.log('time up');
-		$(document).off("keydown");
+		$(document).off("keydown", keyHandler);
 	});
 };

@@ -35,6 +35,79 @@ function Stream (io, jobs) {
 		_io.sockets.on('connection', function (socket) {
 			console.log('socket connection made');
 			_worker.addClient(socket);
+
+			(function (socket) {
+
+				//TODO(jessica) : pass in donation amount for priority
+				socket.on('requestControl', function (data) {
+					console.log('creating new control job');
+					_worker.addJob(socket.id);
+				});
+
+				socket.on('left', function (data) {
+					console.log('left');
+					if ('production' == process.env.NODE_ENV) {
+						serialPort.write("1", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+						serialPort.write("2", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+					}
+				});
+
+				socket.on('right', function (data) {
+					console.log('right');
+					if ('production' == process.env.NODE_ENV) {
+						serialPort.write("1", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+						serialPort.write("3", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+					}
+				});
+
+				socket.on('up', function (data) {
+					console.log('up');
+					if ('production' == process.env.NODE_ENV) {
+						serialPort.write("0", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+						serialPort.write("4", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+					}
+				});
+
+				socket.on('down', function (data) {
+					console.log('down');
+					if ('production' == process.env.NODE_ENV) {
+						serialPort.write("0", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+						serialPort.write("5", function (err, results) {
+							console.log('err: ' + err);
+							console.log('results: ' + results);
+						});
+					}
+				});
+
+				socket.on('disconnect', function () {
+					console.log('socket disconnected');
+					_worker.updateHash(socket.id);
+				});
+
+
+			})(socket);
+			
 		});
 	};
 }

@@ -16,7 +16,6 @@ if ('production' == process.env.NODE_ENV) {
 function Worker (jobs) {
 	this._processing = false;
 	this._jobs = jobs;
-	this._sockets = [];
 	this._socketHash = {};
 
 	/**
@@ -30,75 +29,17 @@ function Worker (jobs) {
 		var me = this;
 
 		this._jobs.process('client', function (job, done) {
+
 			var socket = me._socketHash[job.data.socket_id];
-			console.log('processing job');
-
-			socket.on('left', function (data) {
-				console.log('left');
-				if ('production' == process.env.NODE_ENV) {
-					serialPort.write("1", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-					serialPort.write("2", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-				}
-			});
-
-			socket.on('right', function (data) {
-				console.log('right');
-				if ('production' == process.env.NODE_ENV) {
-					serialPort.write("1", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-					serialPort.write("3", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-				}
-			});
-
-			socket.on('up', function (data) {
-				console.log('up');
-				if ('production' == process.env.NODE_ENV) {
-					serialPort.write("0", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-					serialPort.write("4", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-				}
-			});
-
-			socket.on('down', function (data) {
-				console.log('down');
-				if ('production' == process.env.NODE_ENV) {
-					serialPort.write("0", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-					serialPort.write("5", function (err, results) {
-						console.log('err: ' + err);
-						console.log('results: ' + results);
-					});
-				}
-			});
-
-			socket.on('disconnect', function () {
-				console.log('socket disconnected');
-				done();
-			});
 
 			setTimeout(function () {
 				console.log('time up');
-				socket.emit('timeUp', {});
+				//if id not in hash, socket has been disconnected before timeout
+				if (job.data.socket_id in me._socketHash){
+					socket.emit('timeUp', {});
+				}
 				done();
-			}, 10000);
+			}, 3000);
 
 		});
 	};
@@ -118,21 +59,35 @@ Worker.prototype.start = function () {
 };
 
 /**
-* Create new Kue Job, and link Job to Socket ID
+* Open socket connection
 *
 */
 Worker.prototype.addClient = function(socket) {
-	console.log('creating job');
-	this._sockets.push(socket);
+	console.log('Creating socket connection');
 	var socket_id = socket.id;
 	this._socketHash[socket_id] = socket;
-	this._jobs.create('client', {'socket_id':socket_id}).save();
 };
 
-Worker.prototype.updateHash = function(id, socket) {
+/**
+* Create new job object, and post to kue
+*
+*/
+Worker.prototype.addJob = function(socketID) {
+	console.log('Creating new job');
+	this._jobs.create('client', {'socket_id':socketID}).save();
+};
+
+Worker.prototype.updateHash = function(id, socket, del) {
+	if (del === undefined){
+		del = false;
+	}
+	if (del){
+		delete this._socketHash[job.data.socket_id]
+	}
 	this._socketHash[id] = socket;
 	// TODO: Add some sort of error checking here - does the id already exist?, etc
 }
+
 
 /**
  * Export the constructor.
