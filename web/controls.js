@@ -21,6 +21,6 @@ var makeSocketConnection = function () {
 
 	socket.on('timeUp', function () {
 		console.log('time up');
-		socket.disconnect();
+		$(document).off("keydown");
 	});
 };

@@ -7,11 +7,10 @@ var Worker = require('./worker.js');
  * @api public
  */
 
-function Stream (io, jobs, kue) {
+function Stream (io, jobs) {
 	var _worker;
 	var _io = io;
 	var _jobs = jobs;
-	var _kue = kue;
 	setupIO();
 	setupWorker();
 
@@ -22,7 +21,7 @@ function Stream (io, jobs, kue) {
 	 */
 
 	function setupWorker () {
-		_worker = new Worker(_jobs, _kue);
+		_worker = new Worker(_jobs);
 		_worker.start();
 	};
 
