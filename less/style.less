@@ -1,0 +1,190 @@
+// RESET.CSS //
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: "Proxima-Nova", Helvetica, sans-serif;
+	text-decoration: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+// END OF RESET //
+
+@pink: #ff50e3;
+@dark: #ce40b8;
+@gray: #2d2b2e;
+@light: #dfd5e4;
+
+section{
+	display: inline-block;
+	width: 100%;
+	max-width: 1000px;
+	margin-top: 20px;
+}
+
+header{
+	width: 100%;
+	height: auto;
+	padding: 2% 0;
+	box-shadow: 0 0 4px gray;
+	background-color: @pink;
+	color: white;
+}
+
+.container{
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	height: auto;
+	position: relative;
+
+}
+
+.normal{
+	float: left;
+}
+
+#vid{
+	width: 94%;
+	height: 94%;
+	background-image: url("images/cat.gif");
+	background-size: cover;
+	margin: 0 3%;
+}
+
+.quarter{
+	width: 25%;
+	display: inline-block;
+	height: 500px;
+}
+
+.half{
+	width: 50%;
+	height: 500px;
+	display: inline-block;
+}
+
+h1{
+	font-size: 5em;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+form{
+	width: 100%;
+}
+
+input[type="radio"]{
+    -webkit-appearance: none;
+    border: none;
+    width: 30%;
+    background: @dark; 
+    padding: 20px;
+    margin: 0px !important;
+    opacity: .8;
+    border-radius: 10px;
+}
+input[type="radio"]:checked{
+	outline: none;
+    width: 30%;
+    background: @dark; 
+    padding: 20px;
+    margin: 5px;
+    opacity: 1;
+}
+
+
+.donate{
+	font-family: inherit;
+	font-size: 1.5em;
+	color: @dark;
+	width: 96%;
+	margin: 2%;
+	height: auto;
+	padding: 20px;
+	background-color: @pink;
+	text-transform: uppercase;
+	border-radius: 10px;
+	outline: 0;
+	border: transparent;
+	transition: all .2s ease-in;
+}
+
+.donate:hover{
+	color: @pink;
+	background-color: @dark;
+}
+
+#controls{
+	margin: 0 auto;
+	width: 96%;
+	height: auto;
+	position: relative;
+	border-radius: 10px;
+	margin-top: 20px;
+	background-color: @light;
+	padding: 10px 0;
+}
+
+.control{
+	opacity: .6;
+	width: 30%;
+	margin: 5px 0;
+	
+}
+.up{display: block; margin:0 auto;}
+.left{transform:rotate(-90deg); -ms-transform:rotate(-90deg); /* IE 9 */-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */}
+.down{transform:rotate(180deg); -ms-transform:rotate(180deg); /* IE 9 */-webkit-transform:rotate(180deg); /* Opera, Chrome, and Safari */}
+.right{transform:rotate(90deg); -ms-transform:rotate(90deg); /* IE 9 */-webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari */}
+
+a{
+	.control:hover{opacity: 1;}
+}
+
+
+
+
+
+
