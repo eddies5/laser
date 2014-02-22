@@ -20,6 +20,8 @@ Laser
 
 3. remove old jobs from redis when shutting down
 
+4. thermometer type thing that reaches a limit throws catnip
+
 ## Done
 
 1. have a 'get on queue' method
