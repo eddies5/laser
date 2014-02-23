@@ -15,7 +15,11 @@ $(document).ready(function () {
 		e.preventDefault();
 		var don_amnt = $("input[type='radio']:checked", '#donate_form').val();
 		console.log('donation of ' + don_amnt + ' submitted.');
-		makeSocketConnection(don_amnt);
+		if (don_amnt != undefined) {
+			makeSocketConnection(don_amnt);
+		} else {
+			alert('but, but...teh kittehs');
+		}
 	});
 });
 
