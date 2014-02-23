@@ -16,8 +16,8 @@ app.get('/', function (req, res) {
 
 
 var STREAM_SECRET = "secret",
-	STREAM_PORT = process.argv[3] || 8080,
-	WEBSOCKET_PORT = process.argv[4] || 8084,
+	STREAM_PORT = process.argv[3] || 3075,
+	WEBSOCKET_PORT = process.argv[4] || 3050,
 	STREAM_MAGIC_BYTES = 'jsmp'; // Must be 4 bytes
 
 var width = 320,
@@ -25,6 +25,7 @@ var width = 320,
 
 // Websocket Server
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
+
 socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
 	// struct { char magic[4]; unsigned short width, height;}
@@ -51,26 +52,20 @@ socketServer.broadcast = function(data, opts) {
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
 	var params = request.url.substr(1).split('/');
-	width = (params[1] || 320)|0;
-	height = (params[2] || 240)|0;
+	width = (320)|0;
+	height = (240)|0;
 
-	if( params[0] == STREAM_SECRET ) {
-		console.log(
-			'Stream Connected: ' + request.socket.remoteAddress + 
-			':' + request.socket.remotePort + ' size: ' + width + 'x' + height
-		);
-		request.on('data', function(data){
-			socketServer.broadcast(data, {binary:true});
-		});
-	}
-	else {
-		console.log(
-			'Failed Stream Connection: '+ request.socket.remoteAddress + 
-			request.socket.remotePort + ' - wrong secret.'
-		);
-		response.end();
-	}
+	console.log(
+		'Stream Connected: ' + request.socket.remoteAddress + 
+		':' + request.socket.remotePort + ' size: ' + width + 'x' + height
+	);
+
+	request.on('data', function(data){
+		socketServer.broadcast(data, {binary:true});
+	});
+
 }).listen(STREAM_PORT);
+
 
 kue.app.listen(3000);
 server.listen(80);
