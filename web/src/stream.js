@@ -40,6 +40,7 @@ function Stream (io, jobs) {
 			(function (socket) {
 
 				socket.on('arduino', function (data) {
+					console.log('arduino now connected');
 					_arduinoSocket = socket;
 				});
 
