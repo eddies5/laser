@@ -68,7 +68,7 @@ var streamServer = require('http').createServer( function(request, response) {
 
 
 kue.app.listen(3000);
-server.listen(80);
+server.listen(8080);
 
 console.log('Running: ' + app.get('env'));
 console.log('Laser listening on port 80');
