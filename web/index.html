@@ -3,7 +3,8 @@
   <head>
     <title>Laser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/style.css">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -11,37 +12,46 @@
     <![endif]-->
   </head>
   <body>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-12">
-			    <h1 class="text-center">Laser</h1>
-  			</div>
-  		</div>
-      
-      <div class="row">
-        <div class="col-md-12">
-          <div class="text-center">
-            <p>Say how much money raised so far.</p>
-            <button id="donate_btn" type="button" class="btn btn-primary btn-lg">Donate</button>
-            <input id="donate_amnt" type="text">
+    <div class="container">
+      <header>
+        <h1>Cat Laser!</h1>
+      </header>
+
+      <section>
+        <div class="normal quarter">
+          <form id="donate_form">
+            <input type="radio" name="donate" value="1"></input>
+            <input type="radio" name="donate" value="5"></input>
+            <input type="radio" name="donate" value="10"></input>
+            <input type="submit" id="donate_btn" class="donate" value="Donate"></button>
+          </form>
+
+          <div id="controls">
+            <a href="#"><img class="control up" src="css/images/control.png"></a>
+            <a href="#"><img class="control left" src="css/images/control.png"></a>
+            <a href="#"><img class="control down" src="css/images/control.png"></a>
+            <a href="#"><img class="control right" src="css/images/control.png"></a>
+          </div>
+
+          <div id="percent">
+            
           </div>
         </div>
-      </div>
 
-  		<div class="row">
-  			<div class="col-md-4">
-  				<p>This is where controls go.</p>
-  			</div>
-  			<div class="col-md-4">
-  				<p>This is where the video stream goes.</p>
-  			</div>
-  			<div class="col-md-4">
-  				<p>This is where the queue goes.</p>
-  			</div>
-  		</div>
+        <div class="normal half">
+        <div id="vid"></div>
 
-  	</div>
+        </div>
 
+        <div class="normal quarter">
+          <p>This is where the queue goes.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

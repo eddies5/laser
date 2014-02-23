@@ -41,7 +41,7 @@ function Stream (io, jobs) {
 				//TODO(jessica) : pass in donation amount for priority
 				socket.on('requestControl', function (data) {
 					console.log('creating new control job');
-					_worker.addJob(socket.id);
+					_worker.addJob(socket.id, data.donationAmount);
 				});
 
 				socket.on('left', function (data) {
