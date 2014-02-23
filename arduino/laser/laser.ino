@@ -59,13 +59,13 @@
      serialChar = Serial.read(); // get left/right
      Serial.print("\tDirection: " + serialChar);
      if (serialChar == left) { // left
-//       if (0 <= panDeg && panDeg <= 180) {
+       if (0 <= panDeg && panDeg <= 180) {
          servoPan.write(panDeg -= 10);
-//       }
+       }
      } else if (serialChar == right) { // right
-//       if (0 <= panDeg && panDeg <= 180) {
+       if (0 <= panDeg && panDeg <= 180) {
          servoPan.write(panDeg += 10);
-//       }
+       }
      }
    }
  }

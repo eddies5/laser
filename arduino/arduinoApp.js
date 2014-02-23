@@ -1,5 +1,6 @@
+var io = require('socket.io-client');
 
-var socket = io.connect('http://54.213.241.18:80');
+var socket = io.connect('http://54.213.241.18:8080');
 
 socket.emit('arduino');
 

@@ -39,7 +39,7 @@ function Worker (jobs) {
 					socket.emit('timeUp', {});
 				}
 				done();
-			}, 3000);
+			}, 10000);
 
 		});
 	};
