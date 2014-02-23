@@ -22,7 +22,7 @@ $(document).ready(function () {
 
 var makeSocketConnection = function (don_amnt) {
 	if (!connected){
-		socket = io.connect('http://localhost');
+		socket = io.connect('http://54.213.241.18:80');
 		console.log('made socket connection');
 		connected = true;
 	}
