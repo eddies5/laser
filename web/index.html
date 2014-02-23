@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Laser</title>
+    <title>Cat Laser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="web/favicon.ico">
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -12,36 +14,72 @@
   </head>
   <body>
   	<div class="container">
-  		<div class="row">
-  			<div class="col-md-12">
-			    <h1 class="text-center">Laser</h1>
-  			</div>
-  		</div>
-      
-      <div class="row">
-        <div class="col-md-12">
-          <div class="text-center">
-            <p>Say how much money raised so far.</p>
-            <button id="donate_btn" type="button" class="btn btn-primary btn-lg">Donate</button>
-            <input id="donate_amnt" type="text">
-          </div>
-        </div>
-      </div>
+  		<header>
+  			<h1>Ca<span class="kern">t L</span>aser</h1>
+  		</header>
 
-  		<div class="row">
-  			<div class="col-md-4">
-  				<p>This is where controls go.</p>
+  		<section>
+  			<div class="normal quarter">
+  				<form id="donate_form">
+            
+            <input class="one" type="radio" name="donate" value="1"></input><label for="one">&nbsp;$1</label>
+
+            <input class="two" type="radio" name="donate" value="5"></input><label for="two">&nbsp;$5</label>
+
+            <input class="three" type="radio" name="donate" value="10"></input><label for="three">$10</label>
+
+            <input type="submit" id="donate_btn" class="donate" value="Donate">
+          </form>
+
+          <div class="side" id="controls">
+            <a href="#"><img class="control up" src="css/images/control.png"></a>
+            <a href="#"><img class="control left" src="css/images/control.png"></a>
+            <a href="#"><img class="control down" src="css/images/control.png"></a>
+            <a href="#"><img class="control right" src="css/images/control.png"></a>
+            <p>Use your keyboard!</p>
+          </div>
+
+          <div id="percent">
+            
+          </div>
   			</div>
-  			<div class="col-md-4">
-  				<p>This is where the video stream goes.</p>
+
+  			<div class="normal half">
+        <canvas id="videoCanvas" width="640" height="480">
+          <p>
+          Please use a browser that supports the Canvas Element, like
+          <a href="http://www.google.com/chrome">Chrome</a>,
+          <a href="http://www.mozilla.com/firefox/">Firefox</a>,
+          <a href="http://www.apple.com/safari/">Safari</a> or Internet Explorer 10
+        </p>
+  </canvas>
   			</div>
-  			<div class="col-md-4">
-  				<p>This is where the queue goes.</p>
+
+  			<div class="normal quarter">
+  				<div class="side" id="about">
+              
+              <p>Cats love lasers. And you love cats. So give the cats what they want, and donate money that helps shelters keep animals safe.</p>
+          </div>
   			</div>
-  		</div>
+  		</section>
 
   	</div>
+    <script type="text/javascript" src="jsmpg.js"></script>
+    <script type="text/javascript">
+    // Show loading notice
+    var canvas = document.getElementById('videoCanvas');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#444';
+    ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
 
+    // Setup the WebSocket connection and start the player
+    var client = new WebSocket( 'ws:ec2-54-213-241-18.us-west-2.compute.amazonaws.com' );
+    var player = new jsmpeg(client, {canvas:canvas});
+  </script>
+
+  
+    <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

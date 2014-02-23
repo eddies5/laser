@@ -91,6 +91,7 @@ video {
   vertical-align: baseline;
   font-family: "Proxima-Nova", Helvetica, sans-serif;
   text-decoration: none;
+  line-height: 1.5;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -132,15 +133,27 @@ section {
   display: inline-block;
   width: 100%;
   max-width: 1000px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 header {
   width: 100%;
   height: auto;
   padding: 2% 0;
-  box-shadow: 0 0 4px gray;
+  box-shadow: 0 6px #ce40b8;
+  background-image: url(images/lasers.gif);
+  background-position: bottom right;
+  background-repeat: none;
   background-color: #ff50e3;
-  color: white;
+  color: #ce40b8;
+  letter-spacing: 1px;
+}
+.logo {
+  width: 100px;
+  position: absolute;
+  left: 0;
+}
+.kern {
+  margin: 0 4px 0 -6px;
 }
 .container {
   padding: 0;
@@ -153,17 +166,14 @@ header {
 .normal {
   float: left;
 }
-#vid {
+#videoCanvas {
   width: 94%;
-  height: 94%;
-  background-image: url("images/cat.gif");
-  background-size: cover;
+  min-height: 400px;
   margin: 0 3%;
 }
 .quarter {
   width: 25%;
   display: inline-block;
-  height: 500px;
 }
 .half {
   width: 50%;
@@ -175,6 +185,13 @@ h1 {
   text-transform: uppercase;
   font-weight: 700;
 }
+h2 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+p {
+  font-size: 1.2em;
+}
 form {
   width: 100%;
 }
@@ -182,51 +199,75 @@ input[type="radio"] {
   -webkit-appearance: none;
   border: none;
   width: 30%;
-  background: #ce40b8;
-  padding: 20px;
   margin: 0px !important;
-  opacity: .8;
+  position: relative;
+  opacity: .9;
   border-radius: 10px;
+  height: 80px;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #2d2b2e;
+  transition: all 0.2s ease-in;
+}
+input[type="radio"]:hover {
+  outline: none;
+  opacity: 1;
 }
 input[type="radio"]:checked {
   outline: none;
-  width: 30%;
-  background: #ce40b8;
-  padding: 20px;
-  margin: 5px;
   opacity: 1;
+  background-color: #ce40b8;
+  color: #2d2b2e;
+}
+input[type="radio"] + label {
+  position: absolute;
+  margin: 0 auto;
+  margin: 15px -64px;
+  color: white;
+  font-size: 2em;
 }
 .donate {
+  font-weight: 700;
   font-family: inherit;
   font-size: 1.5em;
-  color: #ce40b8;
+  color: white;
   width: 96%;
-  margin: 2%;
+  margin: 4% 2%;
   height: auto;
   padding: 20px;
-  background-color: #ff50e3;
+  background-color: #52ff8c;
   text-transform: uppercase;
   border-radius: 10px;
   outline: 0;
   border: transparent;
   transition: all 0.2s ease-in;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 0 #46cc6e;
 }
 .donate:hover {
-  color: #ff50e3;
-  background-color: #ce40b8;
+  background-color: #46cc6e;
 }
-#controls {
+.side {
   margin: 0 auto;
   width: 96%;
   height: auto;
   position: relative;
   border-radius: 10px;
-  margin-top: 20px;
-  background-color: #dfd5e4;
+  margin: 0 2%;
   padding: 10px 0;
+  color: #2d2b2e;
+}
+#about {
+  padding-left: 0px;
+  text-align: left;
+}
+#controls {
+  margin: 4% 2%;
 }
 .control {
-  opacity: .6;
+  opacity: .8;
   width: 30%;
   margin: 5px 0;
 }
@@ -257,4 +298,9 @@ input[type="radio"]:checked {
 }
 a .control:hover {
   opacity: 1;
+}
+@media screen and (max-width: 800px) {
+  header {
+    background-image: none;
+  }
 }

@@ -26,6 +26,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	font-family: "Proxima-Nova", Helvetica, sans-serif;
 	text-decoration: none;
+	line-height: 1.5;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -56,23 +57,30 @@ table {
 @dark: #ce40b8;
 @gray: #2d2b2e;
 @light: #dfd5e4;
+@green: #52ff8c;
+@darkgreen: #46cc6e;
 
 section{
 	display: inline-block;
 	width: 100%;
 	max-width: 1000px;
-	margin-top: 20px;
+	margin-top: 30px;
 }
-
 header{
 	width: 100%;
 	height: auto;
 	padding: 2% 0;
-	box-shadow: 0 0 4px gray;
+	box-shadow: 0 6px @dark;
+	background-image: url(images/lasers.gif);
+	background-position: bottom right;
+	background-repeat: none;
 	background-color: @pink;
-	color: white;
+	color: @dark;
+	letter-spacing: 1px;
 }
 
+.logo{width: 100px;position: absolute; left: 0;}
+.kern{margin: 0 4px 0 -6px ;}
 .container{
 	padding: 0;
 	margin: 0 auto;
@@ -87,18 +95,15 @@ header{
 	float: left;
 }
 
-#vid{
+#videoCanvas{
 	width: 94%;
-	height: 94%;
-	background-image: url("images/cat.gif");
-	background-size: cover;
+	min-height: 400px;
 	margin: 0 3%;
 }
 
 .quarter{
 	width: 25%;
 	display: inline-block;
-	height: 500px;
 }
 
 .half{
@@ -112,6 +117,8 @@ h1{
 	text-transform: uppercase;
 	font-weight: 700;
 }
+h2{font-size: 1.5em; text-transform: uppercase;}
+p{font-size: 1.2em; }
 form{
 	width: 100%;
 }
@@ -120,60 +127,82 @@ input[type="radio"]{
     -webkit-appearance: none;
     border: none;
     width: 30%;
-    background: @dark; 
-    padding: 20px;
     margin: 0px !important;
-    opacity: .8;
+    position: relative;
+    opacity: .9;
     border-radius: 10px;
+    height: 80px;
+    
+	outline: 0;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+	background-color: @gray;
+	transition: all .2s ease-in;
 }
-input[type="radio"]:checked{
+
+input[type="radio"]:hover{
 	outline: none;
-    width: 30%;
-    background: @dark; 
-    padding: 20px;
-    margin: 5px;
     opacity: 1;
 }
 
+input[type="radio"]:checked{
+	outline: none;
+    opacity: 1;
+    background-color: @dark;
+    color: @gray;
+}
+
+input[type="radio"] + label{
+	position: absolute;
+	margin: 0 auto;
+	margin: 15px -64px;
+	color: white;
+	font-size: 2em;
+}
 
 .donate{
+	font-weight: 700;
 	font-family: inherit;
 	font-size: 1.5em;
-	color: @dark;
+	color: white;
 	width: 96%;
-	margin: 2%;
+	margin: 4% 2%;
 	height: auto;
 	padding: 20px;
-	background-color: @pink;
+	background-color: @green;
 	text-transform: uppercase;
 	border-radius: 10px;
 	outline: 0;
 	border: transparent;
 	transition: all .2s ease-in;
+	letter-spacing: 1px;
+	box-shadow: 0 6px 0 @darkgreen;
 }
 
 .donate:hover{
-	color: @pink;
-	background-color: @dark;
+	background-color: @darkgreen;
 }
 
-#controls{
+.side{
 	margin: 0 auto;
 	width: 96%;
 	height: auto;
 	position: relative;
 	border-radius: 10px;
-	margin-top: 20px;
-	background-color: @light;
+	margin: 0 2%;
 	padding: 10px 0;
+	color: @gray;
 }
+#about{padding-left: 0px;text-align: left;}
+#controls{margin: 4% 2%;}
 
 .control{
-	opacity: .6;
+	opacity: .8;
 	width: 30%;
 	margin: 5px 0;
-	
 }
+
 .up{display: block; margin:0 auto;}
 .left{transform:rotate(-90deg); -ms-transform:rotate(-90deg); /* IE 9 */-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */}
 .down{transform:rotate(180deg); -ms-transform:rotate(180deg); /* IE 9 */-webkit-transform:rotate(180deg); /* Opera, Chrome, and Safari */}
@@ -183,7 +212,9 @@ a{
 	.control:hover{opacity: 1;}
 }
 
-
+@media screen and (max-width: 800px){
+	header{background-image:none;}
+}
 
 
 
