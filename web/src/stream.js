@@ -40,10 +40,10 @@ function Stream (io, jobs) {
 			(function (socket) {
 
 				socket.on('arduino', function (data) {
+					console.log('arduino now connected');
 					_arduinoSocket = socket;
 				});
 
-				//TODO(jessica) : pass in donation amount for priority
 				socket.on('requestControl', function (data) {
 					console.log('creating new control job');
 					_worker.addJob(socket.id, data.donationAmount);
@@ -51,22 +51,30 @@ function Stream (io, jobs) {
 
 				socket.on('left', function (data) {
 					console.log('left');
-					_arduinoSocket.emit('arduinoLeft');
+					if (_arduinoSocket != undefined){
+						_arduinoSocket.emit('arduinoLeft');
+					}
 				});
 
 				socket.on('right', function (data) {
 					console.log('right');
-					_arduinoSocket('arduinoRight');
+					if (_arduinoSocket != undefined){
+						_arduinoSocket.emit('arduinoRight');
+					}
 				});
 
 				socket.on('up', function (data) {
 					console.log('up');
-					_arduinoSocket.emit('arduinoUp');
+					if (_arduinoSocket != undefined){
+						_arduinoSocket.emit('arduinoUp');
+					}
 				});
 
 				socket.on('down', function (data) {
 					console.log('down');
-					_arduinoSocket.emit('arduinoDown');
+					if (_arduinoSocket != undefined){
+						_arduinoSocket.emit('arduinoDown');
+					}
 				});
 
 				socket.on('disconnect', function () {

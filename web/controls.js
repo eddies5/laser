@@ -16,7 +16,6 @@ $(document).ready(function () {
 		var don_amnt = $("input[type='radio']:checked", '#donate_form').val();
 		console.log('donation of ' + don_amnt + ' submitted.');
 		makeSocketConnection(don_amnt);
-
 	});
 });
 
