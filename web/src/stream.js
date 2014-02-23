@@ -12,7 +12,6 @@ function Stream (io, jobs) {
 	var _io = io;
 	var _jobs = jobs;
 	var _arduinoSocket;
-	var _testSocket;
 	setupIO();
 	setupWorker();
 
@@ -44,10 +43,6 @@ function Stream (io, jobs) {
 					_arduinoSocket = socket;
 				});
 
-				socket.on('TEST', function (data) {
-					_testSocket = socket;
-				});
-
 				//TODO(jessica) : pass in donation amount for priority
 				socket.on('requestControl', function (data) {
 					console.log('creating new control job');
@@ -57,7 +52,6 @@ function Stream (io, jobs) {
 				socket.on('left', function (data) {
 					console.log('left');
 					_arduinoSocket.emit('arduinoLeft');
-					_testSocket.emit('testLeft');
 				});
 
 				socket.on('right', function (data) {
