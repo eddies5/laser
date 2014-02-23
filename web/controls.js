@@ -1,6 +1,7 @@
 var connected = false;
 var socket;
 var keyHandler = function (eventObject) {
+	eventObject.preventDefault();
 	switch(eventObject.which){
 		case 38: socket.emit('up'); break;
 		case 40: socket.emit('down'); break;
@@ -10,23 +11,23 @@ var keyHandler = function (eventObject) {
 };
 
 $(document).ready(function () {
-	$('#donate_btn').click(function () {
-		console.log('donate_btn clicked');
-		makeSocketConnection();
-	});
+	$('#donate_form').submit(function(e) {
+		e.preventDefault();
+		var don_amnt = $("input[type='radio']:checked", '#donate_form').val();
+		console.log('donation of ' + don_amnt + ' submitted.');
+		makeSocketConnection(don_amnt);
 
+	});
 });
 
-var makeSocketConnection = function () {
+var makeSocketConnection = function (don_amnt) {
 	if (!connected){
-		console.log("MAKING NEW CONNECTION IN CONTROL");
-		socket = io.connect('http://localhost');
+		socket = io.connect('http://54.213.241.18');
 		console.log('made socket connection');
 		connected = true;
-
 	}
 
-	socket.emit('requestControl');
+	socket.emit('requestControl', {donationAmount : don_amnt});
 
 	$(document).on("keydown", keyHandler);
 

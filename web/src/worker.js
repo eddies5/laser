@@ -72,9 +72,22 @@ Worker.prototype.addClient = function(socket) {
 * Create new job object, and post to kue
 *
 */
-Worker.prototype.addJob = function(socketID) {
+Worker.prototype.addJob = function(socketID, donationAmount) {
 	console.log('Creating new job');
-	this._jobs.create('client', {'socket_id':socketID}).save();
+	var prior = 'low';
+	if (donationAmount == '1'){
+		prior = 'low';
+	}
+	else if (donationAmount == '5'){
+		prior = 'medium';
+	}
+	else if (donationAmount == '10'){
+		prior = 'high';
+	}
+	else {
+		throw new Error("Invalid donation amount of " + donationAmount);
+	}
+	this._jobs.create('client', {'socket_id':socketID}).priority(prior).save();
 };
 
 Worker.prototype.updateHash = function(id, socket, del) {
@@ -85,7 +98,7 @@ Worker.prototype.updateHash = function(id, socket, del) {
 		delete this._socketHash[job.data.socket_id]
 	}
 	this._socketHash[id] = socket;
-	// TODO: Add some sort of error checking here - does the id already exist?, etc
+	// TODO: Add lots of error checking here - does the id already exist?, etc
 }
 
 
