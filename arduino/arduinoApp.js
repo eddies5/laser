@@ -14,7 +14,7 @@ socket.emit('arduino');
 
 (function (socket) {
  
-	socket.on('arduinoDown', function (data) {
+	socket.on('arduinoLeft', function (data) {
 
 		serialPort.write("0", function (err, results) {
 			console.log('err: ' + err);
@@ -27,7 +27,7 @@ socket.emit('arduino');
 
 	});
 
-	socket.on('arduinoUp', function (data) {
+	socket.on('arduinoRight', function (data) {
 
 		serialPort.write("0", function (err, results) {
 			console.log('err: ' + err);
@@ -40,7 +40,7 @@ socket.emit('arduino');
 
 	});
 
-	socket.on('arduinoLeft', function (data) {
+	socket.on('arduinoUp', function (data) {
 
 		serialPort.write("1", function (err, results) {
 			console.log('err: ' + err);
@@ -53,7 +53,7 @@ socket.emit('arduino');
 
 	});
 
-	socket.on('arduinoRight', function (data) {
+	socket.on('arduinoDown', function (data) {
 
 		serialPort.write("1", function (err, results) {
 			console.log('err: ' + err);
