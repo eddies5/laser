@@ -1,3 +1,11 @@
+
+if ('production' == process.env.NODE_ENV) {
+	var SerialPort = require('serialport').SerialPort;
+	var serialPort = new SerialPort("/dev/tty.usbmodem641", {
+		baudrate: 9600
+	});
+}
+
 var io = require('socket.io-client');
 
 var socket = io.connect('http://54.213.241.18:8080');

@@ -1,11 +1,4 @@
 
-if ('production' == process.env.NODE_ENV) {
-	var SerialPort = require('serialport').SerialPort;
-	var serialPort = new SerialPort("/dev/tty.usbmodem641", {
-		baudrate: 9600
-	});
-}
-
 /**
  * Worker constructor.
  *
