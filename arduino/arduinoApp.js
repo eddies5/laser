@@ -1,6 +1,6 @@
 
 //TODO: change to heroku URL
-var socket = io.connect('http://54.213.241.18');
+var socket = io.connect('http://54.213.241.18:80');
 
 //socket.emit('arduino');
 
