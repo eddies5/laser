@@ -11,6 +11,8 @@ function Stream (io, jobs) {
 	var _worker;
 	var _io = io;
 	var _jobs = jobs;
+	var _arduinoSocket;
+	var _testSocket;
 	setupIO();
 	setupWorker();
 
@@ -38,6 +40,14 @@ function Stream (io, jobs) {
 
 			(function (socket) {
 
+				socket.on('arduino', function (data) {
+					_arduinoSocket = socket;
+				});
+
+				socket.on('TEST', function (data) {
+					_testSocket = socket;
+				});
+
 				//TODO(jessica) : pass in donation amount for priority
 				socket.on('requestControl', function (data) {
 					console.log('creating new control job');
@@ -46,58 +56,23 @@ function Stream (io, jobs) {
 
 				socket.on('left', function (data) {
 					console.log('left');
-					if ('production' == process.env.NODE_ENV) {
-						serialPort.write("1", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-						serialPort.write("2", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-					}
+					_arduinoSocket.emit('arduinoLeft');
+					_testSocket.emit('testLeft');
 				});
 
 				socket.on('right', function (data) {
 					console.log('right');
-					if ('production' == process.env.NODE_ENV) {
-						serialPort.write("1", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-						serialPort.write("3", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-					}
+					_arduinoSocket('arduinoRight');
 				});
 
 				socket.on('up', function (data) {
 					console.log('up');
-					if ('production' == process.env.NODE_ENV) {
-						serialPort.write("0", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-						serialPort.write("4", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-					}
+					_arduinoSocket.emit('arduinoUp');
 				});
 
 				socket.on('down', function (data) {
 					console.log('down');
-					if ('production' == process.env.NODE_ENV) {
-						serialPort.write("0", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-						serialPort.write("5", function (err, results) {
-							console.log('err: ' + err);
-							console.log('results: ' + results);
-						});
-					}
+					_arduinoSocket.emit('arduinoDown');
 				});
 
 				socket.on('disconnect', function () {
