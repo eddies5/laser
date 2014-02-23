@@ -9,16 +9,21 @@ var server = require('http').createServer(app);
 app.use(express.logger());
 app.use(express.static(__dirname));
 
+/*
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
+});*/
+
+app.get('/', function (req, res) {
+  res.send("HELLO");
 });
 
 //kue.app.listen(3000);
 server.listen(80);
 
 //console.log('Running: ' + app.get('env'));
-console.log('Laser listening on port 80');
-console.log('Kue listening on port 3000');
+//console.log('Laser listening on port 80');
+//console.log('Kue listening on port 3000');
 
 //var Stream = require('./src/stream.js')(io, jobs);
 
