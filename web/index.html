@@ -1,54 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Laser</title>
+    <title>Cat Laser</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="shortcut icon" type="image/x-icon" href="web/favicon.ico">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Cat Laser!</h1>
-      </header>
+  	<div class="container">
+  		<header>
+  			<h1>Ca<span class="kern">t L</span>aser</h1>
+  		</header>
 
-      <section>
-        <div class="normal quarter">
-          <form id="donate_form">
-            <input type="radio" name="donate" value="1"></input>
-            <input type="radio" name="donate" value="5"></input>
-            <input type="radio" name="donate" value="10"></input>
-            <input type="submit" id="donate_btn" class="donate" value="Donate"></button>
+  		<section>
+  			<div class="normal quarter">
+  				<form id="donate_form">
+            
+            <input class="one" type="radio" name="donate" value="1"></input><label for="one">&nbsp;$1</label>
+
+            <input class="two" type="radio" name="donate" value="5"></input><label for="two">&nbsp;$5</label>
+
+            <input class="three" type="radio" name="donate" value="10"></input><label for="three">$10</label>
+
+            <input type="submit" id="donate_btn" class="donate" value="Donate">
           </form>
 
-          <div id="controls">
+          <div class="side" id="controls">
             <a href="#"><img class="control up" src="css/images/control.png"></a>
             <a href="#"><img class="control left" src="css/images/control.png"></a>
             <a href="#"><img class="control down" src="css/images/control.png"></a>
             <a href="#"><img class="control right" src="css/images/control.png"></a>
+            <p>Use your keyboard!</p>
           </div>
 
           <div id="percent">
             
           </div>
-        </div>
+  			</div>
 
-        <div class="normal half">
-        <div id="vid"></div>
+  			<div class="normal half">
+        <canvas id="videoCanvas" width="640" height="480">
+          <p>
+            Please use a browser that supports the Canvas Element, like
+            <a href="http://www.google.com/chrome">Chrome</a>,
+            <a href="http://www.mozilla.com/firefox/">Firefox</a>,
+            <a href="http://www.apple.com/safari/">Safari</a> or Internet Explorer 10
+          </p>
+        </canvas>
+        <script type="text/javascript" src="jsmpg.js"></script>
+        <script type="text/javascript">
+          // Show loading notice
+          var canvas = document.getElementById('videoCanvas');
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#444';
+          ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
 
-        </div>
+          // Setup the WebSocket connection and start the player
+          var client = new WebSocket( 'ws://54.213.241.18:3050/' );
+          var player = new jsmpeg(client, {canvas:canvas});
+        </script>
+  			</div>
 
-        <div class="normal quarter">
-          <p>This is where the queue goes.</p>
-        </div>
-      </section>
-
-    </div>
+  			<div class="normal quarter">
+  				<div class="side" id="about">
+              
+              <p>Cats love lasers. And you love cats. So give the cats what they want, and donate money that helps shelters keep animals safe.</p>
+          </div>
+  			</div>
+  		</section>
 
     <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
