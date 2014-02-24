@@ -1,14 +1,16 @@
 
+var config = require('./config');
+
 if ('production' == process.env.NODE_ENV) {
 	var SerialPort = require('serialport').SerialPort;
-	var serialPort = new SerialPort("/dev/tty.usbmodem641", {
+	var serialPort = new SerialPort(config.arduinoSerialPort, {
 		baudrate: 9600
 	});
 }
 
 var io = require('socket.io-client');
 
-var socket = io.connect('http://54.213.241.18:8080');
+var socket = io.connect('http'+config.appServer.host+':'+config.appServer.port);
 
 socket.emit('arduino');
 

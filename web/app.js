@@ -1,3 +1,5 @@
+var config = require('./config');
+
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -16,8 +18,8 @@ app.get('/', function (req, res) {
 
 
 var STREAM_SECRET = "secret",
-	STREAM_PORT = process.argv[3] || 3075,
-	WEBSOCKET_PORT = process.argv[4] || 3050,
+	STREAM_PORT = config.streamServer.port,
+	WEBSOCKET_PORT = config.webSocket.port,
 	STREAM_MAGIC_BYTES = 'jsmp'; // Must be 4 bytes
 
 var width = 320,
@@ -52,8 +54,8 @@ socketServer.broadcast = function(data, opts) {
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
 	var params = request.url.substr(1).split('/');
-	width = (320)|0;
-	height = (240)|0;
+	width = (240)|0;
+	height = (160)|0;
 
 	console.log(
 		'Stream Connected: ' + request.socket.remoteAddress + 
@@ -67,12 +69,12 @@ var streamServer = require('http').createServer( function(request, response) {
 }).listen(STREAM_PORT);
 
 
-kue.app.listen(3000);
-server.listen(8080);
+kue.app.listen(config.kuePort);
+server.listen(config.appServer.port);
 
 console.log('Running: ' + app.get('env'));
-console.log('Laser listening on port 80');
-console.log('Kue listening on port 3000');
+console.log('Laser listening on port' + config.appServer.port);
+console.log('Kue listening on port' + config.kuePort);
 
 var Stream = require('./src/stream.js')(io, jobs);
 
