@@ -1,5 +1,5 @@
 
-var config = require('./config');
+var config = require('../config');
 
 if ('production' == process.env.NODE_ENV) {
 	var SerialPort = require('serialport').SerialPort;
