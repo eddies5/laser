@@ -73,8 +73,8 @@ kue.app.listen(config.kuePort);
 server.listen(config.appServer.port);
 
 console.log('Running: ' + app.get('env'));
-console.log('Laser listening on port' + config.appServer.port);
-console.log('Kue listening on port' + config.kuePort);
+console.log('Laser listening on port: ' + config.appServer.port);
+console.log('Kue listening on port: ' + config.kuePort);
 
 var Stream = require('./src/stream.js')(io, jobs);
 
