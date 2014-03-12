@@ -58,7 +58,7 @@ var streamServer = require('http').createServer( function(request, response) {
 	height = (160)|0;
 
 	console.log(
-		'Stream Connected: ' + request.socket.remoteAddress + 
+		'Stream Connected: ' + request.socket.remoteAddress +
 		':' + request.socket.remotePort + ' size: ' + width + 'x' + height
 	);
 
@@ -77,4 +77,3 @@ console.log('Laser listening on port: ' + config.appServer.port);
 console.log('Kue listening on port: ' + config.kuePort);
 
 var Stream = require('./src/stream.js')(io, jobs);
-

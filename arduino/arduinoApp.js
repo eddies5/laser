@@ -15,7 +15,7 @@ var socket = io.connect('http'+config.appServer.host+':'+config.appServer.port);
 socket.emit('arduino');
 
 (function (socket) {
- 
+
 	socket.on('arduinoRight', function (data) {
 
 		serialPort.write("0", function (err, results) {

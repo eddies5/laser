@@ -1,42 +1,23 @@
 Laser
 =====
 
-1. make the damn thing work
-2. make improvements
-
-# Improvements
-
-1. queue system
-
-  a. queue placement depends on how much you donate
-
-  b. this way we can even let people who don't pay use the laser
+Cat-Laser is a web-controlled laser point. This laser is located in a room filled with cats. Users donate money to control the laser and all of the donations goes back to the shelters the cats are at.
 
 ## To Think about
 
-1. maybe use singleton object for laser control
+1. have a count of how many people are watching the stream
 
-2. have a count of how many people are watching the stream
+2. remove old jobs from redis when shutting down
 
-3. remove old jobs from redis when shutting down
+3. thermometer type thing that reaches a limit throws catnip
 
-4. thermometer type thing that reaches a limit throws catnip
+## How to Start
 
-## Done
+1. start redis (see below)
 
-1. have a 'get on queue' method
+2. node web/app.js
 
-2. data structure for holding connections thoughts
-
-	a. want to be like queue: FIFO
-
-	b. want easy removal for dropped connections
-
-	c. this sounds like a hashmap
-
-	d. I have used a queue and a map to hold the indexes of connections.
-
-3. The setInterval queue.toArray() seems to work except it will continue to work on the last element in the queue even though it is not supposed to. It did not work the first time, other times it did work. Find the special case.
+3. node arduino/arduinoApp.js
 
 ## Redis Stuff
 
