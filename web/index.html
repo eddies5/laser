@@ -65,7 +65,7 @@
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript">
 
-      var config = require('../config');
+      // var config = require('../config');
 
       // Show loading notice
       var canvas = document.getElementById('videoCanvas');
@@ -74,8 +74,8 @@
       ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
 
       // Setup the WebSocket connection and start the player
-      var client = new WebSocket( 'ws://' + config.streamServer.host + ':' + config.webSocket.port );
-      var player = new jsmpeg(client, {canvas:canvas});
+      // var client = new WebSocket( 'ws://' + config.streamServer.host + ':' + config.webSocket.port );
+      // var player = new jsmpeg(client, {canvas:canvas});
     </script>
     <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
