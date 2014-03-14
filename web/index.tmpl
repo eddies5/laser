@@ -69,46 +69,10 @@
       ctx.fillStyle = '#444';
       ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
 
-      var httpRequest;
-      if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-      } else if (window.ActiveXObject) { // IE
-        try {
-          httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        } 
-        catch (e) {
-          try {
-            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-          } 
-          catch (e) {}
-        }
-      }
-
-      if (!httpRequest) {
-        alert("'Giving up :( Cannot create an XMLHTTP instance, i.e.: can't get live feed.");
-        return false;
-      }
-
-      httpRequest.onreadystatechange = showVideoStream;
-      httpRequest.open('GET', '/config');
-      httpRequest.send();
-
-      function showVideoStream() {
-        if (httpRequest.readyState === 4) {
-          if (httpRequest.status === 200) {
-            alert(httpRequest.responseText);
-            console.log(httpRequest);
-            var config = JSON.parse(httpRequest.responseText);
-            console.log(config);
-
-            // Setup the WebSocket connection and start the player
-            var client = new WebSocket( 'ws://' + config.streamServer.host + ':' + config.webSocket.port );
-            var player = new jsmpeg(client, {canvas:canvas});
-          } else {
-            alert('There was a problem with the request.');
-          }
-        }
-      }
+      // Setup the WebSocket connection and start the player
+      var client = new WebSocket('<%= streamServer %>');
+      var player = new jsmpeg(client, {canvas:canvas});
+          
 
     </script>
     <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>

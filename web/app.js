@@ -1,5 +1,22 @@
 var config = require('../config');
 
+var fs = require('fs');
+var _ = require('underscore');
+
+// insert correct urls into client code
+fs.readFile('./index.tmpl', 'utf8', function (err, data) {
+	if (err) throw err;
+	var compiled = _.template(data);
+	var indexHTML = compiled({
+		streamServer: 'ws://' + config.streamServer.host + ":" + config.webSocket.port
+	});
+
+	fs.writeFile('index.html', indexHTML, function (err) {
+		if (err) throw err;
+		console.log("index.html written");
+	});
+});
+
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
