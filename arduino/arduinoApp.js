@@ -10,7 +10,7 @@ if ('production' == process.env.NODE_ENV) {
 
 var io = require('socket.io-client');
 
-var socket = io.connect('http'+config.appServer.host+':'+config.appServer.port);
+var socket = io.connect('http://'+config.appServer.host+':'+config.appServer.port);
 
 socket.emit('arduino');
 
