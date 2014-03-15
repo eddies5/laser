@@ -2,3 +2,5 @@ node_modules/
 dump.rdb
 *.log
 .DS_Store
+index.html
+controls.js

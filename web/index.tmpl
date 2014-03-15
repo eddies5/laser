@@ -20,7 +20,7 @@
   		<section>
   			<div class="normal quarter">
   				<form id="donate_form">
-            
+
             <input class="one" type="radio" name="donate" value="1"></input><label for="one">&nbsp;$1</label>
 
             <input class="two" type="radio" name="donate" value="5"></input><label for="two">&nbsp;$5</label>
@@ -39,7 +39,7 @@
           </div>
 
           <div id="percent">
-            
+
           </div>
   			</div>
 
@@ -52,36 +52,33 @@
             <a href="http://www.apple.com/safari/">Safari</a> or Internet Explorer 10
           </p>
         </canvas>
-        <script type="text/javascript" src="jsmpg.js"></script>
-        <script type="text/javascript" src="config.js"></script>
-        <script type="text/javascript">
+        </div>
 
-          var config = require('../config');
-
-          // Show loading notice
-          var canvas = document.getElementById('videoCanvas');
-          var ctx = canvas.getContext('2d');
-          ctx.fillStyle = '#444';
-          ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
-
-          // Setup the WebSocket connection and start the player
-          var client = new WebSocket( 'ws://' + config.streamServer.host + ':' + config.webSocket.port );
-          var player = new jsmpeg(client, {canvas:canvas});
-        </script>
-  			</div>
-
-  			<div class="normal quarter">
-  				<div class="side" id="about">
-              
+        <div class="normal quarter">
+          <div class="side" id="about">
               <p>Cats love lasers. And you love cats. So give the cats what they want, and donate money that helps shelters keep animals safe.</p>
           </div>
-  			</div>
-  		</section>
+        </div>
+      </section>
 
+    <script type="text/javascript" src="jsmpg.js"></script>
+    <script type="text/javascript">
+      // Show loading notice
+      var canvas = document.getElementById('videoCanvas');
+      var ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#444';
+      ctx.fillText('Loading...', canvas.width/2-30, canvas.height/3);
+
+      // Setup the WebSocket connection and start the player
+      var client = new WebSocket('<%= streamServer %>');
+      var player = new jsmpeg(client, {canvas:canvas});
+          
+
+    </script>
     <script type="text/javascript" src="//use.typekit.net/zul5bbd.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="controls.js" type="text/javascript"></script>
   </body>
