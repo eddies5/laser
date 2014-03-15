@@ -17,6 +17,19 @@ fs.readFile('./index.tmpl', 'utf8', function (err, data) {
 	});
 });
 
+fs.readFile('./controls.tmpl', 'utf8', function (err, data) {
+	if (err) throw err;
+	var compiled = _.template(data);
+	var controlsJS = compiled({
+		appServer: 'http://' + config.appServer.host + ":" + config.appServer.port
+	});
+
+	fs.writeFile('controls.js', controlsJS, function (err) {
+		if (err) throw err;
+		console.log("controls.js written");
+	});
+});
+
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
