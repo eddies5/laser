@@ -46,16 +46,6 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-app.get('/config', function (req, res) {
-	res.writeHead(200, {
-		'Content-Type': 'text/plain'
-	});
-	var obj = {};
-	obj.streamServer = config.streamServer;
-	obj.webSocket = config.webSocket;
-	res.end(JSON.stringify(obj));
-});
-
 if ('production' == process.env.NODE_ENV) {
 	var STREAM_SECRET = "secret",
 		STREAM_PORT = config.streamServer.port,
