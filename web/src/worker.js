@@ -68,13 +68,14 @@ Worker.prototype.addClient = function(socket) {
 Worker.prototype.addJob = function(socketID, donationAmount) {
 	console.log('Creating new job');
 	var prior = 'low';
-	if (donationAmount == '1'){
+
+	if (donationAmount == '1') {
 		prior = 'low';
 	}
-	else if (donationAmount == '5'){
+	else if (donationAmount == '5') {
 		prior = 'medium';
 	}
-	else if (donationAmount == '10'){
+	else if (donationAmount == '10') {
 		prior = 'high';
 	}
 	else {
@@ -84,10 +85,10 @@ Worker.prototype.addJob = function(socketID, donationAmount) {
 };
 
 Worker.prototype.updateHash = function(id, socket, del) {
-	if (del === undefined){
+	if (del === undefined) {
 		del = false;
 	}
-	if (del){
+	if (del) {
 		delete this._socketHash[job.data.socket_id]
 	}
 	this._socketHash[id] = socket;
