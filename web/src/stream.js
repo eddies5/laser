@@ -46,34 +46,56 @@ function Stream (io, jobs) {
 
 				socket.on('requestControl', function (data) {
 					console.log('creating new control job');
+					socket.first = false;
 					_worker.addJob(socket.id, data.donationAmount);
 				});
+				
+				// Explanation of the conditionals below:
+				// if (NODE_ENV == 'production') {
+				// 	if (_arduinoSocket != undefined && socket.first) {
+				// 		console.log('right');
+				// 			_arduinoSocket.emit('arduinoRight');
+				// 	}
+				// } else if (socket.first) {
+				// 	console.log('right');
+				// }
+				// I just combined the two nested conditionals. If we're not running
+				// production then all we have to check for is if this socket is first
 
 				socket.on('left', function (data) {
-					console.log('left');
-					if (_arduinoSocket != undefined){
+					if (process.env.NODE_ENV == 'production' && _arduinoSocket != undefined && socket.first) {
+						console.log('left');
 						_arduinoSocket.emit('arduinoLeft');
+					} else if (socket.first) {
+						console.log('left');
 					}
 				});
 
+
 				socket.on('right', function (data) {
-					console.log('right');
-					if (_arduinoSocket != undefined){
+					if (process.env.NODE_ENV == 'production' && _arduinoSocket != undefined && socket.first) {
+						console.log('right');
 						_arduinoSocket.emit('arduinoRight');
+					} else if (socket.first) {
+						console.log('right');
 					}
 				});
 
 				socket.on('up', function (data) {
-					console.log('up');
-					if (_arduinoSocket != undefined){
+					if (process.env.NODE_ENV == 'production' && _arduinoSocket != undefined && socket.first) {
+						console.log('up');
 						_arduinoSocket.emit('arduinoUp');
+					} else if (socket.first) {
+						console.log('up');
 					}
 				});
 
 				socket.on('down', function (data) {
-					console.log('down');
-					if (_arduinoSocket != undefined){
+					if (process.env.NODE_ENV == 'production' && _arduinoSocket != undefined && socket.first) {
+						console.log('down');
 						_arduinoSocket.emit('arduinoDown');
+					} else if (socket.first) {
+						console.log('down');
 					}
 				});
 
@@ -81,7 +103,6 @@ function Stream (io, jobs) {
 					console.log('socket disconnected');
 					_worker.updateHash(socket.id);
 				});
-
 
 			})(socket);
 			

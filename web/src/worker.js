@@ -24,6 +24,7 @@ function Worker (jobs) {
 		this._jobs.process('client', function (job, done) {
 
 			var socket = me._socketHash[job.data.socket_id];
+			socket.first = true;
 
 			setTimeout(function () {
 				console.log('time up');
