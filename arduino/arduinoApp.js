@@ -10,13 +10,14 @@ if ('production' == process.env.NODE_ENV) {
 
 var io = require('socket.io-client');
 
-var socket = io.connect('http://'+config.appServer.host+':'+config.appServer.port);
+var socket = io.connect('http://' + config.appServer.host + ':' + config.appServer.port);
 
 socket.emit('arduino');
 
 (function (socket) {
 
 	socket.on('arduinoRight', function (data) {
+		console.log('right');
 
 		serialPort.write("0", function (err, results) {
 			console.log('err: ' + err);
@@ -30,6 +31,7 @@ socket.emit('arduino');
 	});
 
 	socket.on('arduinoLeft', function (data) {
+		console.log('left');
 
 		serialPort.write("0", function (err, results) {
 			console.log('err: ' + err);
@@ -43,6 +45,7 @@ socket.emit('arduino');
 	});
 
 	socket.on('arduinoUp', function (data) {
+		console.log('up');
 
 		serialPort.write("1", function (err, results) {
 			console.log('err: ' + err);
@@ -56,6 +59,7 @@ socket.emit('arduino');
 	});
 
 	socket.on('arduinoDown', function (data) {
+		console.log('down');
 
 		serialPort.write("1", function (err, results) {
 			console.log('err: ' + err);
